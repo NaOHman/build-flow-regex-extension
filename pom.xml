@@ -8,19 +8,19 @@
   </parent>
 
   <groupId>org.jenkins-ci.plugins</groupId>
-  <artifactId>build-flow-http-extension</artifactId>
-  <version>0.0.3</version>
+  <artifactId>build-flow-regex-extension</artifactId>
+  <version>0.0.1</version>
   <packaging>hpi</packaging>
 
-  <name>Build Flow HTTP Extension</name>
-  <description>Provides the ability to do HTTP get requests in BuildFlow DSL.</description>
+  <name>Build Flow Regex Extension</name>
+  <description>Provides the ability to execute projects matching a regex string in BuildFlow DSL.</description>
   <url>https://github.com/jniesen/build-flow-http-extension-plugin</url>
   <inceptionYear>2014</inceptionYear>
 
   <developers>
     <developer>
-      <id>jniesen</id>
-      <name>Jonathan Niesen</name>
+      <id>NaOHman</id>
+      <name>Jeffrey Lyman</name>
     </developer>
   </developers>
 
@@ -29,21 +29,6 @@
       <groupId>com.cloudbees.plugins</groupId>
       <artifactId>build-flow-plugin</artifactId>
       <version>0.10</version>
-    </dependency>
-    <dependency>
-      <groupId>org.codehaus.groovy.modules.http-builder</groupId>
-      <artifactId>http-builder</artifactId>
-      <version>0.7</version>
-    </dependency>
-    <dependency>
-      <groupId>org.mockito</groupId>
-      <artifactId>mockito-core</artifactId>
-      <version>1.9.5</version>
-    </dependency>
-    <dependency>
-      <groupId>com.cyrusinnovation</groupId>
-      <artifactId>mockito-groovy-support</artifactId>
-      <version>1.3</version>
     </dependency>
   </dependencies>
 

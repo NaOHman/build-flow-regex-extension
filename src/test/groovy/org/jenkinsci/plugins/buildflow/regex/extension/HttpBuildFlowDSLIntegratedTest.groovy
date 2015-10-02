@@ -1,4 +1,4 @@
-package org.jenkinsci.plugins.buildflow.http.extension
+package org.jenkinsci.plugins.buildflow.regex.extension
 
 import com.cloudbees.plugins.flow.BuildFlow
 import com.cloudbees.plugins.flow.BuildFlowDSLExtension
