@@ -21,7 +21,7 @@ class RegexBuildFlowDSL {
 
     def build_matches(Map args, String regex) {
         //get project names
-        final ItemGroup context = run.getProject().getParent();
+        final ItemGroup context = dsl.getProject().getParent();
         List<String> matchingProjects = new ArrayList<>();
         for (AbstractProject project : Jenkins.getInstance().getItems((ItemGroup) context, AbstractProject.class) ){
             if (project.getName().matches(regex)){
@@ -32,7 +32,7 @@ class RegexBuildFlowDSL {
             throw new JobNotFoundException("No jobs found matching regex: " + regex);
         }
         for (String project: matchingProjects){
-            dls.build(project);
+            dsl.build(project);
         }
     }
 }
