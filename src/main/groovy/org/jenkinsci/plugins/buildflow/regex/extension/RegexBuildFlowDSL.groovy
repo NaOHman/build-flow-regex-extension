@@ -15,15 +15,34 @@ class RegexBuildFlowDSL {
         this.dsl = dsl;
     }
 
-    def build_matches(String regex){
-        build_matches([:], regex);
+    def buildMatches(String regex){
+        buildMatches([:], regex);
     }
 
-    def build_matches(Map args, String regex) {
+    def buildMatches(Map args, String regex){
+        List<AbstractProject> matchingProjects = getMatchingProjects(regex);
+        for (String project: matchingProjects){
+            dsl.build(args, project);
+        }
+    }
+
+    def buildMatchesParallel(String regex){
+        buildMatchesParallel([:], regex);
+    }
+
+    def buildMatchesParallel(Map args, String regex){
+        List<AbstractProject> matchingProjects = getMatchingProjects(regex);
+        List<Closure> closures = new ArrayList();
+        for (String project: matchingProjects){
+            closures.add({p -> dsl.build(args, p)}.curry(project));
+        }
+        dsl.parallel(closures);
+    }
+
+    def getMatchingProjects(String regex) {
         //get project names
-        final ItemGroup context = dsl.getProject().getParent();
         List<String> matchingProjects = new ArrayList<>();
-        for (AbstractProject project : Jenkins.getInstance().getItems((ItemGroup) context, AbstractProject.class) ){
+        for (AbstractProject project : Jenkins.getInstance().getAllItems(AbstractProject.class)){
             if (project.getName().matches(regex)){
                 matchingProjects.add(project.getName());
             }
@@ -31,8 +50,6 @@ class RegexBuildFlowDSL {
         if (matchingProjects.isEmpty()){
             throw new JobNotFoundException("No jobs found matching regex: " + regex);
         }
-        for (String project: matchingProjects){
-            dsl.build(project);
-        }
+        return matchingProjects;
     }
 }
